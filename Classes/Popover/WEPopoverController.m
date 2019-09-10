@@ -652,6 +652,9 @@ static void animate(NSTimeInterval duration, void (^animationBlock)(void), void 
         CGRect windowFrame = [self rotatedFrameForWindow:w];
         UIView *firstSubView = nil;
         for (UIView *subview in w.subviews) {
+            if(subview.isHidden) {
+                continue;
+            }
             //Take the first sub view of the window where the frame matches the window frame, corrected for orientation
             if (firstSubView == nil) {
                 firstSubView = subview;
