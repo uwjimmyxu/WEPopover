@@ -642,38 +642,7 @@ static void animate(NSTimeInterval duration, void (^animationBlock)(void), void 
     if (self.parentView) {
         return self.parentView;
     } else {
-        UIWindow *w = nil;
-        if (theView.window) {
-            w = theView.window;
-        } else {
-            w = [[UIApplication sharedApplication] keyWindow];
-        }
-
-        CGRect windowFrame = [self rotatedFrameForWindow:w];
-        UIView *firstSubView = nil;
-        for (UIView *subview in w.subviews) {
-            if(subview.isHidden) {
-                continue;
-            }
-            //Take the first sub view of the window where the frame matches the window frame, corrected for orientation
-            if (firstSubView == nil) {
-                firstSubView = subview;
-            }
-            if (CGRectEqualToRect(subview.frame, windowFrame)) {
-                firstSubView = subview;
-                break;
-            }
-        }
-
-        if (firstSubView != nil && theView != nil && ![self isView:theView inSameHierarchyAsView:firstSubView]) {
-            firstSubView = nil;
-        }
-
-        if (firstSubView != nil) {
-            return firstSubView;
-        } else {
-            return w;
-        }
+        return theView;
     }
 }
 
